@@ -3,8 +3,8 @@ var app = express();
 
 var ttn = require('ttn');
 
-var appId = 'sauerklaud------';
-var accessKey = 'ttn-account-v2.AAQToobiTgVh3BGgVUaaY437KaBL8J9HkuM5qEnbcMA--------';
+var appId = 'sauerklaud';
+var accessKey = 'ttn-account-v2.AAQToobiTgVh3BGgVUaaY437KaBL8J9HkuM5qEnbcMA';
 
 var client = new ttn.Client('eu', appId, accessKey);
 
