@@ -1,0 +1,63 @@
+body  {
+	background-color: white;
+	align:left
+	padding:0 px;
+	margin-top:0 px;
+	
+	
+	}
+
+#banner {
+  margin: 0 0;
+  padding: 0 0 0 0;
+  width: 1300px;
+  height: 25px;
+  background-color:white;
+  background:white;
+}
+
+#map {
+	position:relative;
+	top: 0;
+	left: 0;
+	margin: 0 0;
+	padding: 0 0 0 0;
+	width: 600px;
+	height: 400px;
+	background-color:white;
+}
+
+#plot1 {
+	position:relative;
+	top: 0;
+	left: 0;
+	margin: 0 0;
+	padding: 0 0 0 0;
+	width: 600px;
+	height: 400px;
+	background-color:red;
+}
+
+#plot2{
+position:relative;
+	top: 0;
+	left: 0;
+	margin: 0 0;
+	padding: 0 0 0 0;
+	width: 600px;
+	height: 400px;
+	background-color:green;
+}
+
+
+#floating-panel {
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 0px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 0px;
+}
+
