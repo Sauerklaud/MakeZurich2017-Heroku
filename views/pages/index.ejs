@@ -4,226 +4,117 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>AirQuality Bitch</title>
-	<link href="https://fonts.googleapis.com/css?family=Lato|Pontano+Sans" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Arsenal|Dosis|Michroma" rel="stylesheet">
-
-    <style>
-      
-	  * {
-	  box-sizing: border-box; 
-	  }
-	  html, body {
-        margin: 0;
-        padding: 0;
-		height:100%;
-    overflow:hidden;
-font-family: 'Arsenal', sans-serif;
-//font-family: 'Dosis', sans-serif;
- // font-family: 'Lato', sans-serif;
-
-	}
-	  	 
-	  	  #texte {
-	  border: 0px solid;
-	  height:55px;
-	  float:left;	
-	  width:100%;
-	  position: relative;
-	  bottom:-7px;
-	  left:70px;
-	  font-size:35px;
-	  color:#e5b367;
-	  }
-	  
-	  	  	  #texte2 {
-	  border: 0px solid;
-	  height:55px;
-	  float:left;	
-	  width:100%;
-	  position: absolute;
-	  top:25px;
-	  right:70px;
-	  font-size:18px;
-	  color:#5a7085;
-	  }	  
-
-	  #texte3 {
-	  border: 0px solid;
-	  height:55px;
-	  float:left;	
-	  width:100%;
-	  position: absolute;
-	  top:29px;
-	  left:0px;
-	  font-size:14	px;
-	  color:#5a7085;
-	  text-align: center;
-	  }
-	  
-	  .aright{
-	  text-align: right;
-	  font-size:25px;
-	  }
-	  #map {
-	  border: 1px solid;
-	  height: 100%;
-	  width: 100%;
-	  float: left;
-	  border-top: 0px;
-	  border-bottom: 0px;
-      }
-	  
-	  	  #graphics {
-	  border: 0px solid;
-	  height: 55px;
-	  width: 100%;
-	  float: left;
-	  position:absolute;
-	  
-	  background-color: #2c3e50;
-	  z-index:-1;
-      }
-	  font {font-size:20px;}
-	  
-	  	#side1 { width:15%; float:left;}
-	#side2 { width:15%; float:right; clear: both;}
-	.rechts{text-align:right;}
-	 
-    </style>
-		<script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Lato|Pontano+Sans|Arsenal|Dosis|Michroma" rel="stylesheet">
+  <link href="air_quality.css" rel="stylesheet">
+  <script type="text/javascript" src="rainbow.js"></script>
+	<script src="https://js.pusher.com/3.2/pusher.min.js"></script>
   </head>
   <body>
-<div id ="texte"><font>OPEN</FONT> <b>AIR QUALITY</b> </div><div id="texte2" class="rechts">Instructions&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Contact</div>
-<div id ="texte3">Press F11 for fullscreen.</div>
+    <div id ="texte"><font>OPEN</FONT> <b>AIR QUALITY</b> </div><div id="texte2" class="rechts">Instructions&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Contact</div>
+    <div id ="texte3">Press F11 for fullscreen.</div>
+    <div id ="logo"></div>
+    <div id="map"></div>
+    <div id="graphics"></div>
+    <script>
 
-<div id="map"></div>
-  <div id="graphics"></div>
-     <script>
+      var map;
 
-// This example creates circles on the map, representing populations in North
-// America.
+      var rainbow = new Rainbow();
+      rainbow.setSpectrum('red', 'yellow', 'green');
 
-// FIRST QUERY TO MONGODB
-//var mongo = require('mongodb');
-//var assert = require('assert');
+      var citymap = [
+        {
+          center: {lat: 47.388289, lng: 8.526612},
+          radius: 30
+        },
+        {
+          center: {lat: 47.388289, lng: 8.5296612},
+          radius: 40
+        },
+        {
+          center: {lat: 47.38288289, lng: 8.536612},
+          radius: 25
+        },
+        {
+          center: {lat: 47.3798289, lng: 8.526612},
+          radius: 40
+        }
+    ];
+    //alert(citymap[0].center.lat);
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
 
-/*var MongoClient = mongo.MongoClient;
-var url = 'mongodb://localhost:27017/testdb';
 
-MongoClient.connect(url, (err, db) => {
-    
-    assert.equal(null, err);
-           
-    db.listCollections().toArray((err, collections) => {
-        
-        assert.equal(err, null);
 
-        console.dir(collections);
-        
-        db.close();
+    function initMap() {
+    // Create the map.
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: {lat: 47.385508, lng: 8.521312},
+      mapTypeId: google.maps.MapTypeId.TERRAIN,
+      zoomControl: true,
+      scaleControl: false,
+      mapTypeControlOptions: {
+        mapTypeIds: [google.maps.MapTypeId.TERRAIN]
+      },
+      disableDefaultUI: true,
+      // How you would like to style the map. 
+      // This is where you would paste any style found on Snazzy Maps.
+      styles:[{"stylers":[{"saturation":-100},{"gamma":1}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi.place_of_worship","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi.place_of_worship","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"on"},{"saturation":50},{"gamma":0},{"hue":"#50a5d1"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text.fill","stylers":[{"color":"#333333"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"weight":0.5},{"color":"#333333"}]},{"featureType":"transit.station","elementType":"labels.icon","stylers":[{"gamma":1},{"saturation":50}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#485b77"},{"visibility":"on"}]},{"featureType": "road.highway","elementType": "all","stylers": [{"visibility": "off"}]}]
+
+      });
+
+      // Construct the circle for each value in citymap.
+      // Note: We scale the area of the circle based on the population.
+      for (var city in citymap) {
+        // Add the circle for this city to the map.
+        var cityCircle = new google.maps.Circle({
+          strokeColor: '#FF0000',
+          strokeOpacity: 0,
+          strokeWeight: 1.0,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35,
+          map: map,
+          center: citymap[city].center,
+          radius: citymap[city].radius
+        });
+      }
+    }
+
+    var pusher = new Pusher('256b563cc59616398c15', {
+      cluster: 'eu',
+      encrypted: true
     });
-});
 
-var citymap = {
-  p1: {
-    center: {lat: 47.388289, lng: 8.526612},
-    radius: 20
-  },
-  newyork: {
-    center: {lat: 47.388289, lng: 8.546612},
-    radius: 20
-  },
-  losangeles: {
-    center: {lat: 47.488289, lng: 8.536612},
-    radius: 15
-  },
-  vancouver: {
-    center: {lat: 47.388289, lng: 8.526612},
-    radius: 30
-  }
-};
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+    
+    var new_measurement = {
+      pm10: data.pm10,
+    pm25: data.pm25,
+    latitude: parseFloat(data.latitude),
+    longitude: parseFloat(data.longitude),
+    timestamp: data.timestamp,
+    meas_id: data.meas_id,
+    isValid: data.isValid 
+    };	
 
-*/
-
-var citymap = [
-  {
-    center: {lat: 47.388289, lng: 8.526612},
-    radius: 20
-  },
-  {
-    center: {lat: 47.388289, lng: 8.546612},
-    radius: 20
-  },
-  {
-    center: {lat: 47.488289, lng: 8.536612},
-    radius: 15
-  },
-  {
-    center: {lat: 47.388289, lng: 8.526612},
-    radius: 30
-  }
-];
-alert(citymap[0].center.lat);
-// Enable pusher logging - don't include this in production
-   Pusher.logToConsole = true;
-
-   var pusher = new Pusher('256b563cc59616398c15', {
-     cluster: 'eu',
-     encrypted: true
-   });
-
-   var channel = pusher.subscribe('my-channel');
-   channel.bind('my-event', function(data) {
-   
-   var new_measurement = {
-    pm10: data.pm10,
-	pm25: data.pm25,
-	latitude: data.latitude,
-	longitude: data.longitude,
-	timestamp: data.timestamp,
-	meas_id: data.meas_id,
-	isValid: data.isValid 
-	};	
-	//alert(new_measurement.longitude);
-	 //randomMarker();	 
-   });
-   
-   
-function initMap() {
-  // Create the map.
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14,
-    center: {lat: 47.388289, lng: 8.526612},
-	mapTypeId: google.maps.MapTypeId.TERRAIN,
-	zoomControl: true,
-    scaleControl: false,
-	mapTypeControlOptions: {
-    mapTypeIds: [google.maps.MapTypeId.TERRAIN]
-  },
-  disableDefaultUI: true,
-  // How you would like to style the map. 
-                    // This is where you would paste any style found on Snazzy Maps.
-                    styles:[{"stylers":[{"saturation":-100},{"gamma":1}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi.place_of_worship","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi.place_of_worship","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"on"},{"saturation":50},{"gamma":0},{"hue":"#50a5d1"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text.fill","stylers":[{"color":"#333333"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"weight":0.5},{"color":"#333333"}]},{"featureType":"transit.station","elementType":"labels.icon","stylers":[{"gamma":1},{"saturation":50}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#485b77"},{"visibility":"on"}]},{"featureType": "road.highway","elementType": "all","stylers": [{"visibility": "off"}]}]
-					
-					<!-- [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}] -->
-  });
-
-  // Construct the circle for each value in citymap.
-  // Note: We scale the area of the circle based on the population.
-  for (var city in citymap) {
-    // Add the circle for this city to the map.
+    // add new measurement to the map
     var cityCircle = new google.maps.Circle({
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FF0000',
+      strokeColor: '#'+rainbow.colourAt(new_measurement.pm25),
+      strokeOpacity: 0,
+      strokeWeight: 1.0,
+      fillColor: '#'+rainbow.colourAt(new_measurement.pm25),
       fillOpacity: 0.35,
       map: map,
-      center: citymap[city].center,
-      radius: citymap[city].radius
+      center: {lat: new_measurement.latitude, lng: new_measurement.longitude},
+      radius: 30
+      });
+
+    //alert(new_measurement.longitude);
+
     });
-  }
-}
+
     </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKjS-7cG6NT3CnddYbeWag3hKQIHuBosU&signed_in=true&callback=initMap"></script>
