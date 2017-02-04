@@ -34,12 +34,15 @@ client.on('message', function(deviceId, message) {
   } 
   });
 
+  var rawstr = message.payload_raw.toString()
+  var data = rawstr.split(";")
+
   pusher.trigger('my-channel', 'my-event', {
-        "pm10": '34',
-        "pm25": '43',
-        "latitude": '47.505',
-        "longitude": '7.502',
-        "timestamp": '2343242',
+        "pm10": data[1],
+        "pm25": data[0],
+        "latitude": data[2],
+        "longitude": data[3],
+        "timestamp": data[4],
         "meas_id": '4342',
         "isValid": 'true'
     });
@@ -55,6 +58,7 @@ app.get('/sendfakedata', function(request, response) {
         "meas_id": '4342',
         "isValid": 'true'
     });
+    response.render('pages/fakedatasent');
 });
 
 var path = require('path')
