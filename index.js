@@ -45,7 +45,7 @@ client.on('message', function(deviceId, message) {
     });
 });
 
-app.get('/sendFakeData', function(request, response) {
+app.get('/sendfakedata', function(request, response) {
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
         "pm25": '43',
