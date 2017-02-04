@@ -34,9 +34,27 @@ client.on('message', function(deviceId, message) {
   } 
   });
 
-  //pusher.trigger('my-channel', 'my-event', {
-  //  "message": "hello world"
-  //});
+  pusher.trigger('my-channel', 'my-event', {
+        "pm10": '34',
+        "pm25": '43',
+        "latitude": '47.505',
+        "longitude": '7.502',
+        "timestamp": '2343242',
+        "meas_id": '4342',
+        "isValid": 'true'
+    });
+});
+
+app.get('/sendFakeData', function(request, response) {
+    pusher.trigger('my-channel', 'my-event', {
+        "pm10": '34',
+        "pm25": '43',
+        "latitude": '47.505',
+        "longitude": '7.502',
+        "timestamp": '2343242',
+        "meas_id": '4342',
+        "isValid": 'true'
+    });
 });
 
 var path = require('path')
