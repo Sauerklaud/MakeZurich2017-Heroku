@@ -81,7 +81,7 @@ app.get('/sendfakedata', function(request, response) {
         "pm10": '34',
         "pm25": '43',
         "latitude": '47.384309',
-        "longitude": '8.27077',
+        "longitude": '8.527077',
         "timestamp": '2343243',
         "meas_id": '4342',
         "isValid": 'true'
