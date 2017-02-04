@@ -56,8 +56,8 @@ app.get('/sendfakedata', function(request, response) {
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
         "pm25": '43',
-        "latitude": '47.385098',
-        "longitude": '8.521089',
+        "latitude": '47.384718',
+        "longitude": '8.526926',
         "timestamp": '2343242',
         "meas_id": '4342',
         "isValid": 'true'
@@ -68,8 +68,8 @@ app.get('/sendfakedata', function(request, response) {
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
         "pm25": '43',
-        "latitude": '47.385436',
-        "longitude": '8.521339',
+        "latitude": '47.384526',
+        "longitude": '8.526964',
         "timestamp": '2343243',
         "meas_id": '4342',
         "isValid": 'true'
@@ -80,8 +80,8 @@ app.get('/sendfakedata', function(request, response) {
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
         "pm25": '43',
-        "latitude": '47.385701',
-        "longitude": '8.521618',
+        "latitude": '47.384309',
+        "longitude": '8.27077',
         "timestamp": '2343243',
         "meas_id": '4342',
         "isValid": 'true'
@@ -92,8 +92,8 @@ app.get('/sendfakedata', function(request, response) {
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
         "pm25": '43',
-        "latitude": '47.385872',
-        "longitude": '8.521790',
+        "latitude": '47.384129',
+        "longitude": '8.527153',
         "timestamp": '2343243',
         "meas_id": '4342',
         "isValid": 'true'
@@ -104,8 +104,8 @@ app.get('/sendfakedata', function(request, response) {
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
         "pm25": '43',
-        "latitude": '47.386002',
-        "longitude": '8.522074',
+        "latitude": '47.383899',
+        "longitude": '8.527248',
         "timestamp": '2343243',
         "meas_id": '4342',
         "isValid": 'true'
@@ -116,8 +116,8 @@ app.get('/sendfakedata', function(request, response) {
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
         "pm25": '43',
-        "latitude": '47.386039',
-        "longitude": '8.522739',
+        "latitude": '47.383681',
+        "longitude": '8.527380',
         "timestamp": '2343243',
         "meas_id": '4342',
         "isValid": 'true'
@@ -128,13 +128,50 @@ app.get('/sendfakedata', function(request, response) {
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
         "pm25": '43',
-        "latitude": '47.386282',
-        "longitude": '8.523313',
+        "latitude": '47.383489',
+        "longitude": '8.527531',
         "timestamp": '2343243',
         "meas_id": '4342',
         "isValid": 'true'
     });
     }, 7000);  
+
+  setTimeout(function(){ 
+    pusher.trigger('my-channel', 'my-event', {
+        "pm10": '34',
+        "pm25": '43',
+        "latitude": '47.383297',
+        "longitude": '8.527616',
+        "timestamp": '2343243',
+        "meas_id": '4342',
+        "isValid": 'true'
+    });
+    }, 8000);  
+
+  setTimeout(function(){ 
+    pusher.trigger('my-channel', 'my-event', {
+        "pm10": '34',
+        "pm25": '43',
+        "latitude": '47.387244',
+        "longitude": '8.528085',
+        "timestamp": '2343243',
+        "meas_id": '4342',
+        "isValid": 'true'
+    });
+    }, 9000);  
+
+  setTimeout(function(){ 
+    pusher.trigger('my-channel', 'my-event', {
+        "pm10": '34',
+        "pm25": '43',
+        "latitude": '47.382393',
+        "longitude": '8.528397',
+        "timestamp": '2343243',
+        "meas_id": '4342',
+        "isValid": 'true'
+    });
+    }, 10000);  
+
 
     response.render('pages/fakedatasent');
 });
