@@ -3,5 +3,5 @@
 - NodeJs App
 - Subscribes data stream from thethingsnetwork.org (MQTT)
 - Writes the data stream to the database
-- The live data stream in a map (Google Maps)
+- The live data stream visualized in a map (Google Maps)
 
