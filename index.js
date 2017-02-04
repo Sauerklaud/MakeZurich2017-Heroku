@@ -55,7 +55,7 @@ app.get('/sendfakedata', function(request, response) {
 
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
-        "pm25": '43',
+        "pm25": '30',
         "latitude": '47.384718',
         "longitude": '8.526926',
         "timestamp": '2343242',
@@ -67,7 +67,7 @@ app.get('/sendfakedata', function(request, response) {
 
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
-        "pm25": '43',
+        "pm25": '35',
         "latitude": '47.384526',
         "longitude": '8.526964',
         "timestamp": '2343243',
@@ -79,7 +79,7 @@ app.get('/sendfakedata', function(request, response) {
   setTimeout(function(){ 
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
-        "pm25": '43',
+        "pm25": '33',
         "latitude": '47.384309',
         "longitude": '8.527077',
         "timestamp": '2343243',
@@ -91,7 +91,7 @@ app.get('/sendfakedata', function(request, response) {
   setTimeout(function(){ 
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
-        "pm25": '43',
+        "pm25": '40',
         "latitude": '47.384129',
         "longitude": '8.527153',
         "timestamp": '2343243',
@@ -103,7 +103,7 @@ app.get('/sendfakedata', function(request, response) {
   setTimeout(function(){ 
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
-        "pm25": '43',
+        "pm25": '35',
         "latitude": '47.383899',
         "longitude": '8.527248',
         "timestamp": '2343243',
@@ -115,7 +115,7 @@ app.get('/sendfakedata', function(request, response) {
   setTimeout(function(){ 
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
-        "pm25": '43',
+        "pm25": '42',
         "latitude": '47.383681',
         "longitude": '8.527380',
         "timestamp": '2343243',
@@ -127,7 +127,7 @@ app.get('/sendfakedata', function(request, response) {
   setTimeout(function(){ 
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
-        "pm25": '43',
+        "pm25": '50',
         "latitude": '47.383489',
         "longitude": '8.527531',
         "timestamp": '2343243',
@@ -139,7 +139,7 @@ app.get('/sendfakedata', function(request, response) {
   setTimeout(function(){ 
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
-        "pm25": '43',
+        "pm25": '51',
         "latitude": '47.383297',
         "longitude": '8.527616',
         "timestamp": '2343243',
@@ -151,7 +151,7 @@ app.get('/sendfakedata', function(request, response) {
   setTimeout(function(){ 
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
-        "pm25": '43',
+        "pm25": '57',
         "latitude": '47.387244',
         "longitude": '8.528085',
         "timestamp": '2343243',
@@ -163,7 +163,7 @@ app.get('/sendfakedata', function(request, response) {
   setTimeout(function(){ 
     pusher.trigger('my-channel', 'my-event', {
         "pm10": '34',
-        "pm25": '43',
+        "pm25": '45',
         "latitude": '47.382393',
         "longitude": '8.528397',
         "timestamp": '2343243',
