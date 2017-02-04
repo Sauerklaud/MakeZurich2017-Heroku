@@ -7,8 +7,8 @@ function Rainbow()
 {
 	"use strict";
 	var gradients = null;
-	var minNum = 200;
-	var maxNum = 700;
+	var minNum = 50;
+	var maxNum = 300;
 	var colours = ['ff0000', 'ffff00', '00ff00', '0000ff']; 
 	setColours(colours);
 	
