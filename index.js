@@ -11,6 +11,17 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('mongodb://back:1234@ds035059.mlab.com:35059/heroku_mqq5pbhp');
 
+
+var Pusher = require('pusher');
+
+var pusher = new Pusher({
+  appId: '298067',
+  key: '256b563cc59616398c15',
+  secret: 'ad03aff71ebb5af9bacc',
+  cluster: 'eu',
+  encrypted: true
+});
+
 client.on('message', function(deviceId, message) {
   console.log(message.payload_raw);
 
@@ -22,6 +33,10 @@ client.on('message', function(deviceId, message) {
     console.log('Insert DB Error!');
   } 
   });
+
+  //pusher.trigger('my-channel', 'my-event', {
+  //  "message": "hello world"
+  //});
 });
 
 var path = require('path')
