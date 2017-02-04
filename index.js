@@ -34,6 +34,8 @@ client.on('message', function(deviceId, message) {
   } 
   });
 
+  console.log(message.payload_raw.toString())
+
   var rawstr = message.payload_raw.toString()
   var data = rawstr.split(";")
 
